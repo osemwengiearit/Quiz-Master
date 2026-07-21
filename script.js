@@ -38,6 +38,7 @@ const scoreElement = document.getElementById("score");
 
 let currentQuestion = 0;
 let score = 0;
+let quizFinished = false;
 
 function showQuestion() {
   answersElement.innerHTML = "";
