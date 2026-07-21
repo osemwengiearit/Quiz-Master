@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background: #f4f7fb;
   display: flex;
   justify-content: center;
@@ -41,6 +41,12 @@ h1 {
   gap: 15px;
 }
 
+#answers h2 {
+  text-align: center;
+  color: #16a34a;
+  margin: 20px 0;
+}
+
 .answer-btn {
   width: 100%;
   padding: 14px;
@@ -53,7 +59,7 @@ h1 {
   transition: all 0.3s ease;
 }
 
-.answer-btn:hover {
+.answer-btn:not(:disabled):hover {
   background: #2563eb;
   color: white;
 }
@@ -70,6 +76,11 @@ h1 {
   color: white;
 }
 
+.answer-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.85;
+}
+
 #next-btn {
   margin-top: 25px;
   width: 100%;
@@ -81,7 +92,7 @@ h1 {
   font-size: 1rem;
   cursor: pointer;
   display: none;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 #next-btn:hover {

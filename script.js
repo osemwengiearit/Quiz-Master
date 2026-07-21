@@ -40,19 +40,17 @@ let currentQuestion = 0;
 let score = 0;
 
 function showQuestion() {
-  // Clear previous answers
   answersElement.innerHTML = "";
 
-  // Hide Next button
+  scoreElement.textContent = `Final Score: ${score}/${questions.length}`;
   nextButton.style.display = "none";
 
-  // Get current question
+  scoreElement.textContent = `Score: ${score}`;
+
   const question = questions[currentQuestion];
 
-  // Display question
   questionElement.textContent = question.question;
 
-  // Display answers
   question.answers.forEach((answer, index) => {
     const button = document.createElement("button");
 
@@ -67,5 +65,50 @@ function showQuestion() {
   });
 }
 
-// Show first question
 showQuestion();
+
+function selectAnswer(selectedIndex) {
+  const correctIndex = questions[currentQuestion].correct;
+
+  const buttons = answersElement.querySelectorAll(".answer-btn");
+
+  buttons.forEach((button) => {
+    button.disabled = true;
+  });
+
+  buttons.forEach((button, index) => {
+    if (index === correctIndex) {
+      button.classList.add("correct");
+    } else if (index === selectedIndex) {
+      button.classList.add("wrong");
+    }
+  });
+
+  if (selectedIndex === correctIndex) {
+    score++;
+  }
+
+  scoreElement.textContent = `Score: ${score}`;
+
+  nextButton.style.display = "block";
+}
+
+nextButton.addEventListener("click", () => {
+  currentQuestion++;
+
+  if (currentQuestion < questions.length) {
+    showQuestion();
+  } else {
+    showResult();
+  }
+});
+
+function showResult() {
+  questionElement.textContent = "Quiz Completed! 🎉";
+
+  answersElement.innerHTML = `
+    <h2>You scored ${score} out of ${questions.length}</h2>
+  `;
+
+  nextButton.style.display = "none";
+}
