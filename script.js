@@ -30,3 +30,42 @@ const questions = [
     correct: 1,
   },
 ];
+
+const questionElement = document.getElementById("question");
+const answersElement = document.getElementById("answers");
+const nextButton = document.getElementById("next-btn");
+const scoreElement = document.getElementById("score");
+
+let currentQuestion = 0;
+let score = 0;
+
+function showQuestion() {
+  // Clear previous answers
+  answersElement.innerHTML = "";
+
+  // Hide Next button
+  nextButton.style.display = "none";
+
+  // Get current question
+  const question = questions[currentQuestion];
+
+  // Display question
+  questionElement.textContent = question.question;
+
+  // Display answers
+  question.answers.forEach((answer, index) => {
+    const button = document.createElement("button");
+
+    button.textContent = answer;
+    button.classList.add("answer-btn");
+
+    button.addEventListener("click", () => {
+      selectAnswer(index);
+    });
+
+    answersElement.appendChild(button);
+  });
+}
+
+// Show first question
+showQuestion();
