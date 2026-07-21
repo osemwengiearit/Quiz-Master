@@ -73,6 +73,7 @@ function showResult() {
 
   scoreElement.textContent = `Final Score: ${score}/${questions.length}`;
 
+  quizFinished = true;
   nextButton.textContent = "Restart Quiz";
   nextButton.style.display = "block";
 }
@@ -106,7 +107,7 @@ function selectAnswer(selectedIndex) {
 }
 
 nextButton.addEventListener("click", () => {
-  if (currentQuestion === questions.length) {
+  if (quizFinished) {
     restartQuiz();
     return;
   }
@@ -117,13 +118,13 @@ nextButton.addEventListener("click", () => {
     showQuestion();
   } else {
     showResult();
-    currentQuestion++;
   }
 });
 
 function restartQuiz() {
   currentQuestion = 0;
   score = 0;
+  quizFinished = false;
 
   scoreElement.textContent = "Score: 0";
   nextButton.textContent = "Next Question";
