@@ -35,6 +35,7 @@ const questionElement = document.getElementById("question");
 const answersElement = document.getElementById("answers");
 const nextButton = document.getElementById("next-btn");
 const scoreElement = document.getElementById("score");
+const questionNumber = document.getElementById("question-number");
 
 let currentQuestion = 0;
 let score = 0;
@@ -48,6 +49,7 @@ function showQuestion() {
   scoreElement.textContent = `Score: ${score}`;
 
   const question = questions[currentQuestion];
+  questionNumber.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
 
   questionElement.textContent = question.question;
 
@@ -66,6 +68,7 @@ function showQuestion() {
 }
 
 function showResult() {
+  questionNumber.textContent = "";
   questionElement.textContent = "Quiz Completed! 🎉";
 
   answersElement.innerHTML = `
