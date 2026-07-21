@@ -42,7 +42,6 @@ let score = 0;
 function showQuestion() {
   answersElement.innerHTML = "";
 
-  scoreElement.textContent = `Final Score: ${score}/${questions.length}`;
   nextButton.style.display = "none";
 
   scoreElement.textContent = `Score: ${score}`;
@@ -63,6 +62,19 @@ function showQuestion() {
 
     answersElement.appendChild(button);
   });
+}
+
+function showResult() {
+  questionElement.textContent = "Quiz Completed! 🎉";
+
+  answersElement.innerHTML = `
+    <h2>You scored ${score} out of ${questions.length}</h2>
+  `;
+
+  scoreElement.textContent = `Final Score: ${score}/${questions.length}`;
+
+  nextButton.textContent = "Restart Quiz";
+  nextButton.style.display = "block";
 }
 
 showQuestion();
@@ -94,21 +106,27 @@ function selectAnswer(selectedIndex) {
 }
 
 nextButton.addEventListener("click", () => {
+  if (currentQuestion === questions.length) {
+    restartQuiz();
+    return;
+  }
+
   currentQuestion++;
 
   if (currentQuestion < questions.length) {
     showQuestion();
   } else {
     showResult();
+    currentQuestion++;
   }
 });
 
-function showResult() {
-  questionElement.textContent = "Quiz Completed! 🎉";
+function restartQuiz() {
+  currentQuestion = 0;
+  score = 0;
 
-  answersElement.innerHTML = `
-    <h2>You scored ${score} out of ${questions.length}</h2>
-  `;
+  scoreElement.textContent = "Score: 0";
+  nextButton.textContent = "Next Question";
 
-  nextButton.style.display = "none";
+  showQuestion();
 }
